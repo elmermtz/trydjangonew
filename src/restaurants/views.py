@@ -1,37 +1,15 @@
-import random
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
-# Create your views here.
-# function based view
-def home(request):
-    num = None
-    some_list = [
-        random.randint(0, 100000000), 
-        random.randint(0, 100000000), 
-        random.randint(0, 100000000)
-    ]
-    condition_bool_item = False
-    if condition_bool_item:
-        num = random.randint(0, 100000000)
+from django.views.generic import TemplateView
+
+from .models import RestaurantLocation
+
+def restaurant_listview(request):
+    template_name = 'restaurants/restaurants_list.html'
+    queryset = RestaurantLocation.objects.all()
     context = {
-        "num": num, 
-        "some_list": some_list
+        "object_list": queryset
     }
-    return render(request, "home.html", context)
-
-def about(request):
-    context = {
-    }
-    return render(request, "about.html", context)
-
-
-def contact(request):
-    context = {
-    }
-    return render(request, "contact.html", context)
-
-class ContactView(View):
-    def get(self, request, *args, **kwargs):
-        context = {}
-        return render(request, "contact.html", context)
+    return render(request, template_name, context)
