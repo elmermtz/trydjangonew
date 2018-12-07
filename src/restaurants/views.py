@@ -1,8 +1,8 @@
 from django.db.models import Q
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 
 from .models import RestaurantLocation
 
@@ -17,9 +17,7 @@ def restaurant_listview(request,):
 
 class RestaurantListView(ListView):
     def get_queryset(self):
-    	# inicializa variable slug 
         slug = self.kwargs.get("slug")
-        # si hay un slug el filtre la lista con nombre exacto o que contenga el slug
         if slug:
             queryset = RestaurantLocation.objects.filter(
                     Q(category__iexact=slug) |
@@ -28,3 +26,12 @@ class RestaurantListView(ListView):
         else:
             queryset = RestaurantLocation.objects.all()
         return queryset
+
+
+class RestaurantDetailView(DetailView):
+    queryset = RestaurantLocation.objects.all()
+    
+    def get_object(self, *args, **kwargs):
+        rest_id = self.kwargs.get('rest_id')
+        obj = get_object_or_404(RestaurantLocation, id=rest_id) # pk = rest_id
+        return obj
