@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 
 from restaurants.views import (
+    restaurant_createview,
     restaurant_listview,
     RestaurantListView,
     RestaurantDetailView,
@@ -28,9 +29,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='home.html')),
     url(r'^restaurants/$', RestaurantListView.as_view()),
-    #este url llama a la clase RestaurantCreateView en vistas
-    url(r'^restaurants/create/$', RestaurantCreateView.as_view()),
-    #cuando en el viewlista se da click al enlace se llamara a este url
+    url(r'^restaurants/create/$',  RestaurantCreateView.as_view()),
+    #url(r'^restaurants/create/$',   restaurant_createview ),
     url(r'^restaurants/(?P<slug>[\w-]+)/$', RestaurantDetailView.as_view()),
     #url(r'^restaurants/asian/$', AsianFusionRestaurantListView.as_view()),
     url(r'^about/$', TemplateView.as_view(template_name='about.html')),
