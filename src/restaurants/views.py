@@ -1,4 +1,3 @@
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -71,7 +70,7 @@ class RestaurantCreateView(LoginRequiredMixin, CreateView):
     form_class = RestaurantLocationCreateForm
     login_url = '/login/'
     template_name = 'restaurants/form.html'
-    success_url = "/restaurants/"
+    #success_url = "/restaurants/"
 
     def form_valid(self, form):
         instance = form.save(commit=False)
