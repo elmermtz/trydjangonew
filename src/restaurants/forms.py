@@ -24,9 +24,9 @@ class RestaurantLocationCreateForm(forms.ModelForm):
             'name',
             'location',
             'category',
+            'slug',
         ]
 
-     #ejemplo de un validator   
     def clean_name(self):
         name = self.cleaned_data.get("name")
         if name == "Hello":

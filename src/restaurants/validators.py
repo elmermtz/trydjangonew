@@ -15,8 +15,8 @@ def validate_email(value):
 
 
 
-CATEGORIES = ['Mexican', 'Asian', 'American', 'Whatever']
-#Esta funcion hace que solo ea aceptada estas categorias en la BD
+CATEGORIES = ['Mexican', 'Asian', 'American', 'Italian', 'Chinese', 'Thai', 'Pizza', 'Other']
+
 def validate_category(value):
     cat = value.capitalize()
     if not value in CATEGORIES and not cat in CATEGORIES:
